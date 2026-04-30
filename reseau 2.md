@@ -102,6 +102,51 @@ Objectif :
 
 ---
 
+## ⚙️ Script PowerShell (création des home folders + liaison AD)
+
+```powershell
+Import-Module ActiveDirectory
+
+$SharePath = "C:\perso"
+$ShareName = "perso"
+$Domain = "formatif"
+$ServerName = $env:COMPUTERNAME
+
+# Créer C:\perso
+if (-not (Test-Path $SharePath)) {
+    New-Item -Path $SharePath -ItemType Directory
+}
+
+# Créer le partage \\$serveur\perso
+if (-not (Get-SmbShare -Name $ShareName -ErrorAction SilentlyContinue)) {
+    New-SmbShare -Name $ShareName -Path $SharePath -FullAccess "Administrators","Domain Admins" -ChangeAccess "Authenticated Users"
+}
+
+# Boucle utilisateurs
+for ($i = 1; $i -le 10; $i++) {
+
+    $username = "user$i"
+    $UserFolder = "$SharePath\$username"
+    $HomeDirectory = "\\$ServerName\$ShareName\$username"
+
+    # Créer dossier
+    if (-not (Test-Path $UserFolder)) {
+        New-Item -Path $UserFolder -ItemType Directory
+    }
+
+    # Permissions
+    icacls $UserFolder /inheritance:r
+    icacls $UserFolder /grant "${Domain}\${username}:(OI)(CI)F"
+    icacls $UserFolder /grant "Administrators:(OI)(CI)F"
+    icacls $UserFolder /grant "SYSTEM:(OI)(CI)F"
+
+    # Assigner dans AD
+    Set-ADUser -Identity $username -HomeDrive "H:" -HomeDirectory $HomeDirectory
+}
+```
+
+---
+
 ## 🖥️ Connexion à distance (RDP)
 
 Permet de se connecter au serveur à distance
