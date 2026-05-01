@@ -147,6 +147,109 @@ for ($i = 1; $i -le 10; $i++) {
 
 ---
 
+## 🔗 Joindre un poste client au domaine
+
+### 🧠 Principe important
+
+Un poste client ne se connecte pas directement avec une adresse réseau et un nom de domaine.
+
+Il utilise plutôt :
+
+1. **L’adresse IP du serveur en DNS** pour trouver le domaine
+2. **Le nom du domaine** pour joindre Active Directory
+3. **Un compte domaine** pour ouvrir une session
+
+---
+
+### 1️⃣ Configurer le DNS du client
+
+Sur le poste client, le serveur DNS doit être l’adresse IP du serveur Active Directory.
+
+Exemple :
+
+```text
+DNS préféré : 192.168.1.10
+```
+
+Le DNS sert à trouver le domaine, par exemple :
+
+```text
+test.reseau
+```
+
+---
+
+### 2️⃣ Joindre le domaine
+
+Sur le poste client :
+
+1. Clic droit sur **Ce PC**
+2. Cliquer sur **Propriétés**
+3. Cliquer sur **Modifier les paramètres**
+4. Cliquer sur **Modifier**
+5. Choisir **Domaine**
+6. Entrer le nom du domaine
+
+Exemple :
+
+```text
+test.reseau
+```
+
+---
+
+### 3️⃣ Entrer un compte administrateur du domaine
+
+Windows va demander un compte qui a le droit d’ajouter un poste au domaine.
+
+Exemple :
+
+```text
+test\Administrator
+```
+
+ou :
+
+```text
+Administrator@test.reseau
+```
+
+Ensuite, il faut redémarrer le poste client.
+
+---
+
+### 4️⃣ Se connecter avec un utilisateur du domaine
+
+Après le redémarrage, choisir **Autre utilisateur**, puis entrer :
+
+```text
+test\A
+```
+
+ou :
+
+```text
+A@test.reseau
+```
+
+---
+
+### 🧠 Résumé simple
+
+| Élément | Sert à quoi ? | Exemple |
+|---|---|---|
+| IP du serveur | Trouver le serveur AD/DNS | `192.168.1.10` |
+| Nom du domaine | Joindre le domaine | `test.reseau` |
+| Compte utilisateur | Ouvrir une session | `test\A` |
+
+---
+
+### ✅ Phrase à retenir
+
+Le client utilise l’adresse IP du serveur comme DNS pour trouver le domaine, puis il se connecte avec un compte du domaine.
+
+---
+
 ## 🖥️ Connexion à distance (RDP)
 
 Permet de se connecter au serveur à distance
@@ -172,5 +275,6 @@ Installation de l’outil de sauvegarde
 * Groupes = gestion accès
 * Dossiers perso = stockage
 * Permissions = sécurité
+* Joindre un client au domaine = DNS du serveur + nom du domaine + compte domaine
 * RDP = accès à distance
 * Sauvegarde = protection
