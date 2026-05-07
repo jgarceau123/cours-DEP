@@ -187,7 +187,8 @@ Sur le poste client :
 2. Cliquer sur **Propriétés**
 3. Cliquer sur **Paramètres système avancés**
 
-<img src="https://github.com/user-attachments/assets/c0272bbf-d783-408e-b484-081f0f099f00" width="50%">
+<img width="1686" height="888" alt="image" src="https://github.com/user-attachments/assets/3c6a460f-ecd1-4801-a739-3aaa2cec4a8c" />
+
 
 4. Cliquer sur **Modifier**
 5. Choisir **Domaine**
