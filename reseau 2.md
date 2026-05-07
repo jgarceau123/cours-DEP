@@ -168,7 +168,7 @@ Sur le poste client, le serveur DNS doit être l’adresse IP du serveur Active 
 Exemple :
 
 ```text
-DNS préféré : 192.168.1.10
+DNS préféré : 192.168.48.159
 ```
 
 Le DNS sert à trouver le domaine, par exemple :
