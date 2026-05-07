@@ -187,7 +187,7 @@ Sur le poste client :
 2. Cliquer sur **Propriétés**
 3. Cliquer sur **Paramètres système avancés**
 
-<img width="1686" height="888" alt="image" src="https://github.com/user-attachments/assets/3c6a460f-ecd1-4801-a739-3aaa2cec4a8c" />
+<img src="https://github.com/user-attachments/assets/3c6a460f-ecd1-4801-a739-3aaa2cec4a8c" width="50%">
 
 
 4. Cliquer sur **Modifier**
