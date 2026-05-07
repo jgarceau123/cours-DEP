@@ -185,7 +185,10 @@ Sur le poste client :
 
 1. Clic droit sur **Ce PC**
 2. Cliquer sur **Propriétés**
-3. Cliquer sur **Modifier les paramètres**
+3. Cliquer sur **Paramètres système avancés**
+
+<img src="https://github.com/user-attachments/assets/c0272bbf-d783-408e-b484-081f0f099f00" width="50%">
+
 4. Cliquer sur **Modifier**
 5. Choisir **Domaine**
 6. Entrer le nom du domaine
