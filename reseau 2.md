@@ -147,6 +147,30 @@ for ($i = 1; $i -le 10; $i++) {
 
 ---
 
+## 🔑 Login Script
+
+Pour mettre en place un login script, il y a trois étapes à réaliser :
+
+### 1️⃣ Naviguer jusqu’au dossier Script
+
+Sur le serveur, aller dans :
+
+```text
+C:\Windows\Sysvol\Sysvol\<nom_du_domaine>\Script
+```
+
+C’est ici que doit être créé le script.
+
+### 2️⃣ Créer le script
+
+Créer le script avec les commandes voulues.
+
+### 3️⃣ Assigner le script aux utilisateurs
+
+Dans le profil des utilisateurs Active Directory, entrer le nom du script qui devra être exécuté à l’ouverture de session.
+
+---
+
 ## 🔗 Joindre un poste client au domaine
 
 ### 🧠 Principe important
@@ -209,7 +233,7 @@ Windows va demander un compte qui a le droit d’ajouter un poste au domaine.
 Exemple :
 
 ```text
-test\Administrator
+test\\Administrator
 ```
 
 ou :
@@ -227,7 +251,7 @@ Ensuite, il faut redémarrer le poste client.
 Après le redémarrage, choisir **Autre utilisateur**, puis entrer :
 
 ```text
-test\A
+test\\A
 ```
 
 ou :
@@ -244,7 +268,7 @@ A@test.reseau
 |---|---|---|
 | IP du serveur | Trouver le serveur AD/DNS | `192.168.1.10` |
 | Nom du domaine | Joindre le domaine | `test.reseau` |
-| Compte utilisateur | Ouvrir une session | `test\A` |
+| Compte utilisateur | Ouvrir une session | `test\\A` |
 
 ---
 
@@ -279,6 +303,7 @@ Installation de l’outil de sauvegarde
 * Groupes = gestion accès
 * Dossiers perso = stockage
 * Permissions = sécurité
+* Login script = automatisation au login
 * Joindre un client au domaine = DNS du serveur + nom du domaine + compte domaine
 * RDP = accès à distance
 * Sauvegarde = protection
