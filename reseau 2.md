@@ -294,6 +294,16 @@ Installation de l’outil de sauvegarde
 <img src="https://github.com/user-attachments/assets/31a0de40-5a09-4a1f-bcfb-0730d6bfc097" width="50%">
 
 ---
+---
+
+## 🏢 GPO (Gestion de stratégie de groupe)
+
+Les GPO permettent d’appliquer automatiquement des paramètres Windows aux utilisateurs et ordinateurs du domaine.
+
+<img src="https://github.com/user-attachments/assets/1e247583-b4ed-457b-9384-3d478a00fefb" width="70%">
+
+
+
 
 ## 🧠 Résumé
 
