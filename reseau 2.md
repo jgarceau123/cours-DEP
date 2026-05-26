@@ -106,43 +106,6 @@ Objectif :
 
 ```powershell
 Import-Module ActiveDirectory
-
-$SharePath = "C:\perso"
-$ShareName = "perso"
-$Domain = "formatif"
-$ServerName = $env:COMPUTERNAME
-
-# Créer C:\perso
-if (-not (Test-Path $SharePath)) {
-    New-Item -Path $SharePath -ItemType Directory
-}
-
-# Créer le partage \\$serveur\perso
-if (-not (Get-SmbShare -Name $ShareName -ErrorAction SilentlyContinue)) {
-    New-SmbShare -Name $ShareName -Path $SharePath -FullAccess "Administrators","Domain Admins" -ChangeAccess "Authenticated Users"
-}
-
-# Boucle utilisateurs
-for ($i = 1; $i -le 10; $i++) {
-
-    $username = "user$i"
-    $UserFolder = "$SharePath\$username"
-    $HomeDirectory = "\\$ServerName\$ShareName\$username"
-
-    # Créer dossier
-    if (-not (Test-Path $UserFolder)) {
-        New-Item -Path $UserFolder -ItemType Directory
-    }
-
-    # Permissions
-    icacls $UserFolder /inheritance:r
-    icacls $UserFolder /grant "${Domain}\${username}:(OI)(CI)F"
-    icacls $UserFolder /grant "Administrators:(OI)(CI)F"
-    icacls $UserFolder /grant "SYSTEM:(OI)(CI)F"
-
-    # Assigner dans AD
-    Set-ADUser -Identity $username -HomeDrive "H:" -HomeDirectory $HomeDirectory
-}
 ```
 
 ---
@@ -151,130 +114,19 @@ for ($i = 1; $i -le 10; $i++) {
 
 Pour mettre en place un login script, il y a trois étapes à réaliser :
 
-### 1️⃣ Naviguer jusqu’au dossier Script
-
-Sur le serveur, aller dans :
-
-```text
-C:\Windows\Sysvol\Sysvol\<nom_du_domaine>\Script
-```
-
-C’est ici que doit être créé le script.
-
-### 2️⃣ Créer le script
-
-Créer le script avec les commandes voulues.
-
-### 3️⃣ Assigner le script aux utilisateurs
-
-Dans le profil des utilisateurs Active Directory, entrer le nom du script qui devra être exécuté à l’ouverture de session.
-
 ---
 
 ## 🔗 Joindre un poste client au domaine
 
-### 🧠 Principe important
-
-Un poste client ne se connecte pas directement avec une adresse réseau et un nom de domaine.
-
-Il utilise plutôt :
-
-1. **L’adresse IP du serveur en DNS** pour trouver le domaine
-2. **Le nom du domaine** pour joindre Active Directory
-3. **Un compte domaine** pour ouvrir une session
+Le client utilise l’adresse IP du serveur comme DNS pour trouver le domaine.
 
 ---
 
-### 1️⃣ Configurer le DNS du client
+## 🏢 GPO (Gestion de stratégie de groupe)
 
-Sur le poste client, le serveur DNS doit être l’adresse IP du serveur Active Directory.
+Les GPO permettent d’appliquer automatiquement des configurations Windows aux utilisateurs et ordinateurs du domaine.
 
-Exemple :
-
-```text
-DNS préféré : 192.168.48.159
-```
-
-Le DNS sert à trouver le domaine, par exemple :
-
-```text
-test.reseau
-```
-
----
-
-### 2️⃣ Joindre le domaine
-
-Sur le poste client :
-
-1. Clic droit sur **Ce PC**
-2. Cliquer sur **Propriétés**
-3. Cliquer sur **Paramètres système avancés**
-
-<img src="https://github.com/user-attachments/assets/3c6a460f-ecd1-4801-a739-3aaa2cec4a8c" width="50%">
-
-
-4. Cliquer sur **Modifier**
-5. Choisir **Domaine**
-6. Entrer le nom du domaine
-
-Exemple :
-
-```text
-test.reseau
-```
-
----
-
-### 3️⃣ Entrer un compte administrateur du domaine
-
-Windows va demander un compte qui a le droit d’ajouter un poste au domaine.
-
-Exemple :
-
-```text
-test\\Administrator
-```
-
-ou :
-
-```text
-Administrator@test.reseau
-```
-
-Ensuite, il faut redémarrer le poste client.
-
----
-
-### 4️⃣ Se connecter avec un utilisateur du domaine
-
-Après le redémarrage, choisir **Autre utilisateur**, puis entrer :
-
-```text
-test\\A
-```
-
-ou :
-
-```text
-A@test.reseau
-```
-
----
-
-### 🧠 Résumé simple
-
-| Élément | Sert à quoi ? | Exemple |
-|---|---|---|
-| IP du serveur | Trouver le serveur AD/DNS | `192.168.1.10` |
-| Nom du domaine | Joindre le domaine | `test.reseau` |
-| Compte utilisateur | Ouvrir une session | `test\\A` |
-
----
-
-### ✅ Phrase à retenir
-
-Le client utilise l’adresse IP du serveur comme DNS pour trouver le domaine, puis il se connecte avec un compte du domaine.
+<img src="https://github.com/user-attachments/assets/1e247583-b4ed-457b-9384-3d478a00fefb" width="70%">
 
 ---
 
@@ -305,5 +157,6 @@ Installation de l’outil de sauvegarde
 * Permissions = sécurité
 * Login script = automatisation au login
 * Joindre un client au domaine = DNS du serveur + nom du domaine + compte domaine
+* GPO = gestion centralisée
 * RDP = accès à distance
 * Sauvegarde = protection
