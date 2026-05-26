@@ -305,6 +305,9 @@ Les GPO permettent d’appliquer automatiquement des paramètres Windows aux uti
 <img width="965" height="682" alt="image" src="https://github.com/user-attachments/assets/70592c7d-6e44-40a4-86b4-c571a44945aa" />
 
 
+gpo
+<img width="1920" height="930" alt="image" src="https://github.com/user-attachments/assets/4d718d93-24fa-477b-a7c9-90f00d946600" />
+
 ---
 
 ## 🧠 Résumé
