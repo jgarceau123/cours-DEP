@@ -10,6 +10,7 @@ Configurer l’adresse IP du serveur :
 * Masque de sous-réseau
 * Passerelle
 * DNS
+* changer le nom du serveur
 
 <img src="https://github.com/user-attachments/assets/89898664-d0ec-447f-b174-fcdd02194622" width="50%">
 <img src="https://github.com/user-attachments/assets/7a797e09-70fe-4928-ac14-04c9130c15a0" width="50%">
